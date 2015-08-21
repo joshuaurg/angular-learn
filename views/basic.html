@@ -3,12 +3,46 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style type="text/css">
+		.baseline{width: 100%;border-bottom: 1px;height: 1px;background-color: #ddd;margin: 20px 0;}
+	</style>
 	<script type="text/javascript" src="../js/angular.min.js"></script>
 </head>
-<body ng-app='basic'>
-	<div></div>
+<body ng-app='myApp'>
+	<div >
+		username：<input type="text" ng-model="username">
+		you input <span ng-bind="username"></span> just now!
+
+		<div class="baseline"></div>
+
+		<div ng-init="address='beijing'">
+			address:	<span ng-bind="address"></span>
+		</div>
+		
+		<div class="baseline"></div>
+		
+		<div ng-controller="personCtrl">
+
+			firstname: <span ng-bind="person.firstname"></span>
+			<br>
+			lastname: <span ng-bind="person.lastname"></span>
+			<br>
+			fullname: {{person.fullname()}}
+		</div>
+		
+	</div>
 </body>
 <script type="text/javascript">
-	
+	var app = angular.module("myApp",[]);
+	app.controller("personCtrl",function($scope){
+		$scope.person = {
+			firstname:"dong",
+			lastname:"chenxu",
+			fullname:function(){
+				var x = $scope.person;
+				return x.firstname+"  "+x.lastname;
+			}
+		};
+	});
 </script>
 </html>
